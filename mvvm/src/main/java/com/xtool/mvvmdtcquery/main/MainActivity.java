@@ -12,6 +12,7 @@ import com.xtool.mvvmdtcquery.R;
 import com.xtool.mvvmdtcquery.adapter.DtcListAdapter;
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
 import com.xtool.mvvmdtcquery.databinding.ActivityMainBinding;
+import com.xtool.mvvmdtcquery.databinding.ItemDtcBinding;
 import com.xtool.mvvmdtcquery.utils.RxBus;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class MainActivity extends Activity implements MainView {
             }
         });
         lv_dtc = (ListView) findViewById(R.id.lv_dtc);
+//        ItemDtcBinding binding1 = DataBindingUtil.setContentView(this,R.layout.item_dtc);
         adapter = new DtcListAdapter(this,dtcCustomList);
         lv_dtc.setAdapter(adapter);
 
@@ -67,11 +69,10 @@ public class MainActivity extends Activity implements MainView {
         dtcCustomList.clear();
         dtcCustomList.addAll(dtcCustoms);
         adapter.notifyDataSetChanged();
-
     }
 
     @Override
     public String getDcode() {
-        return binding.getDcode();
+        return binding.etDcode.getText().toString();
     }
 }

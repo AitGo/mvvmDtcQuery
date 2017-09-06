@@ -1,6 +1,8 @@
 package com.xtool.mvvmdtcquery.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.xtool.mvvmdtcquery.Base.MyBaseAdapter;
 import com.xtool.mvvmdtcquery.R;
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
+import com.xtool.mvvmdtcquery.databinding.ItemDtcBinding;
 
 import java.util.List;
 
@@ -21,43 +24,32 @@ import java.util.List;
 public class DtcListAdapter extends MyBaseAdapter {
     private LayoutInflater mLayoutInflater;
     private List<DtcCustom> dtcCustomList;
+    private Context context;
+    private ItemDtcBinding binding;
 
     public DtcListAdapter(Context context,List<DtcCustom> dtcCustomList) {
         super(dtcCustomList);
+        this.context = context;
         this.dtcCustomList = dtcCustomList;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        DtcListViewHolder viewHolder = null;
-
         if(convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.item_dtc,null);
-            viewHolder = new DtcListViewHolder();
-            viewHolder.m_dcode = (TextView) convertView.findViewById(R.id.tv_dcode);
-            viewHolder.m_dname = (TextView) convertView.findViewById(R.id.tv_dname);
-            viewHolder.m_dinfo = (TextView) convertView.findViewById(R.id.tv_dinfo);
-            viewHolder.m_dcause = (TextView) convertView.findViewById(R.id.tv_dcause);
-            viewHolder.m_dfix = (TextView) convertView.findViewById(R.id.tv_dfix);
-            convertView.setTag(viewHolder);
+            binding = DataBindingUtil.inflate(mLayoutInflater,R.layout.item_dtc,parent,false);
         }else {
-            viewHolder = (DtcListViewHolder) convertView.getTag();
+            binding = DataBindingUtil.getBinding(convertView);
+
         }
-        viewHolder.m_dcode.setText(dtcCustomList.get(position).getDcode());
-        viewHolder.m_dname.setText(dtcCustomList.get(position).getDname());
-        viewHolder.m_dinfo.setText(dtcCustomList.get(position).getDinfo());
-        viewHolder.m_dcause.setText(dtcCustomList.get(position).getDcause());
-        viewHolder.m_dfix.setText(dtcCustomList.get(position).getDfix());
+        binding.setDcode(dtcCustomList.get(position).getDcode());
+        binding.setDname(dtcCustomList.get(position).getDname());
+        binding.setDinfo(dtcCustomList.get(position).getDinfo());
+        binding.setDcause(dtcCustomList.get(position).getDcause());
+        binding.setDfix(dtcCustomList.get(position).getDfix());
 
-        return convertView;
+        return binding.getRoot();
     }
 
-    class DtcListViewHolder {
-        public TextView m_dcode;
-        public TextView m_dname;
-        public TextView m_dinfo;
-        public TextView m_dcause;
-        public TextView m_dfix;
-    }
+
 }

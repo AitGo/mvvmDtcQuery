@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="dcode"
+            type="java.lang.String"/>
+        <variable
+            name="dname"
+            type="java.lang.String"/>
+        <variable
+            name="dinfo"
+            type="java.lang.String"/>
+        <variable
+            name="dcause"
+            type="java.lang.String"/>
+        <variable
+            name="dfix"
+            type="java.lang.String"/>
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.05"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{dcode}"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
 
@@ -21,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.15"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{dname}"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
 
@@ -30,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.2"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{dinfo}"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
 
@@ -39,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.3"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{dcause}"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
 
@@ -48,8 +66,9 @@
             android:layout_width="0dp"
             android:layout_weight="0.3"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{dfix}"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
     </LinearLayout>
 </LinearLayout>
+</layout>
