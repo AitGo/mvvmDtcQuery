@@ -1,4 +1,4 @@
-package com.xtool.mvvmdtcquery.main;
+package com.xtool.mvpdtcquery.main;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.xtool.mvvmdtcquery.R;
-import com.xtool.mvvmdtcquery.adapter.DtcListAdapter;
-import com.xtool.mvvmdtcquery.bean.DtcCustom;
-import com.xtool.mvvmdtcquery.utils.RxBus;
+import com.xtool.mvpdtcquery.R;
+import com.xtool.mvpdtcquery.adapter.DtcListAdapter;
+import com.xtool.mvpdtcquery.bean.DtcCustom;
+import com.xtool.mvpdtcquery.utils.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
         initView();
         presenter = new MainPresenterImpl(this);
     }
