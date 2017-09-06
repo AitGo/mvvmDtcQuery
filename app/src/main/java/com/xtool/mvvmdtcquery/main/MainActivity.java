@@ -2,35 +2,27 @@ package com.xtool.mvvmdtcquery.main;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.xtool.mvvmdtcquery.R;
 import com.xtool.mvvmdtcquery.adapter.DtcListAdapter;
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
-import com.xtool.mvvmdtcquery.http.PostActivation;
-import com.xtool.mvvmdtcquery.http.ServiceFactory;
 import com.xtool.mvvmdtcquery.utils.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends Activity implements MainView,View.OnClickListener {
 
     private MainPresenter presenter;
 
-    private static final String TAG = "MainActivity";
+    private final String TAG = this.getClass().getSimpleName();
     private Button btn_query;
     private EditText et_dcode;
     private ListView lv_dtc;
@@ -55,7 +47,6 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
         btn_query = (Button) findViewById(R.id.btn_query);
         et_dcode = (EditText) findViewById(R.id.et_dcode);
         lv_dtc = (ListView) findViewById(R.id.lv_dtc);
-
         btn_query.setOnClickListener(this);
         adapter = new DtcListAdapter(this,dtcCustomList);
         lv_dtc.setAdapter(adapter);
@@ -80,8 +71,10 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
 
     @Override
     public void showListMessage(List<DtcCustom> dtcCustoms) {
-        adapter.setDtcCustomList(dtcCustoms);
+        dtcCustomList.clear();
+        dtcCustomList.addAll(dtcCustoms);
         adapter.notifyDataSetChanged();
+
     }
 
     @Override

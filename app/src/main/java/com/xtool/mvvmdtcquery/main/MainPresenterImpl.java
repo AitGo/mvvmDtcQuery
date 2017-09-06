@@ -1,19 +1,13 @@
 package com.xtool.mvvmdtcquery.main;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
-import com.xtool.mvvmdtcquery.http.PostActivation;
-import com.xtool.mvvmdtcquery.http.ServiceFactory;
-import com.xtool.mvvmdtcquery.utils.RxBus;
 
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -23,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainPresenterImpl implements MainPresenter {
 
-    private String TAG = "MainPresenterImpl";
+    private final String TAG = this.getClass().getSimpleName();
     private MainView view;
     private MainModel model;
 
@@ -35,7 +29,8 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onClick() {
         String dcode = view.getDcode();
-        model.getDtcCustom(dcode).subscribeOn(Schedulers.io())
+        model.getDtcCustom(dcode)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<DtcCustom>>() {
                     @Override

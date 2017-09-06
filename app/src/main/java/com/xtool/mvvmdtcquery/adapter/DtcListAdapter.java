@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
+import com.xtool.mvvmdtcquery.Base.MyBaseAdapter;
 import com.xtool.mvvmdtcquery.R;
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
 
@@ -17,34 +18,14 @@ import java.util.List;
  * Created by xtool on 2017/9/2.
  */
 
-public class DtcListAdapter extends BaseAdapter {
+public class DtcListAdapter extends MyBaseAdapter {
     private LayoutInflater mLayoutInflater;
-    private Context context;
     private List<DtcCustom> dtcCustomList;
 
     public DtcListAdapter(Context context,List<DtcCustom> dtcCustomList) {
-        this.context = context;
+        super(dtcCustomList);
         this.dtcCustomList = dtcCustomList;
         mLayoutInflater = LayoutInflater.from(context);
-    }
-
-    public void setDtcCustomList(List<DtcCustom> dtcCustomList) {
-        this.dtcCustomList = dtcCustomList;
-    }
-
-    @Override
-    public int getCount() {
-        return dtcCustomList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return dtcCustomList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
     @Override
