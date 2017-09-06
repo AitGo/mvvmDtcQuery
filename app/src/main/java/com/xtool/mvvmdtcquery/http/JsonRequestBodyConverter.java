@@ -4,8 +4,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
-import com.xtool.dtcquery.utils.CodingUtils;
-import com.xtool.dtcquery.utils.RandomUtils;
+import com.xtool.mvvmdtcquery.utils.CodingUtils;
+import com.xtool.mvvmdtcquery.utils.RandomUtils;
+
 
 import java.io.IOException;
 import java.lang.reflect.Field;

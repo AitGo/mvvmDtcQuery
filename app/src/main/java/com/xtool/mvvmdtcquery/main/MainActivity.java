@@ -60,13 +60,12 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
         adapter = new DtcListAdapter(this,dtcCustomList);
         lv_dtc.setAdapter(adapter);
 
-//        RxBus.getInstance().subscribe(String.class, new Consumer() {
-//            @Override
-//            public void accept(Object o) throws Exception {
-//                if(o.toString().equals("发送事件"))
-//                    Toast.makeText(getApplicationContext(),"1234",Toast.LENGTH_LONG).show();
-//            }
-//        });
+        RxBus.getInstance().subscribe(String.class, new Consumer() {
+            @Override
+            public void accept(Object o) throws Exception {
+                showListMessage((List)o);
+            }
+        });
     }
 
     @Override
@@ -81,7 +80,7 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
 
     @Override
     public void showListMessage(List<DtcCustom> dtcCustoms) {
-        adapter.setDtcCustomList(dtcCustomList);
+        adapter.setDtcCustomList(dtcCustoms);
         adapter.notifyDataSetChanged();
     }
 

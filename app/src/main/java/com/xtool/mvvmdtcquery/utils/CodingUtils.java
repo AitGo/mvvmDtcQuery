@@ -1,5 +1,6 @@
 package com.xtool.mvvmdtcquery.utils;
 
+import java.io.InputStream;
 import java.lang.reflect.Field;
 
 /**
@@ -21,7 +22,9 @@ public class CodingUtils {
 			if(object != null && !object.equals("")) {
 				if(field.getName().equals(keyName)) {
 					//RSA
-					String publicKey = RSAUtils.getKey(ContextUtil.getInstance().getAssets().open(publicKeyName));
+					ContextUtil context = ContextUtil.getInstance();
+					InputStream stream = context.getAssets().open(publicKeyName);
+					String publicKey = RSAUtils.getKey(stream);
 					byte[] endata = RSAUtils.encryptByPublicKey(uuid.getBytes(), publicKey);
 					String encode = Base64Utils.encode(endata);
 					field.set(t, encode);

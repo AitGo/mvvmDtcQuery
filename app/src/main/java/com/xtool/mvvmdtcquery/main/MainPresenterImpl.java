@@ -2,6 +2,7 @@ package com.xtool.mvvmdtcquery.main;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
 import com.xtool.mvvmdtcquery.http.PostActivation;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -21,23 +23,19 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainPresenterImpl implements MainPresenter {
 
-    private Context context;
     private String TAG = "MainPresenterImpl";
     private MainView view;
+    private MainModel model;
 
-    public MainPresenterImpl(Context context) {
-        this.context = context;
+    public MainPresenterImpl(MainView mainView) {
+        this.view = mainView;
+        model = new MainModelImpl();
     }
 
     @Override
     public void onClick() {
-        RxBus.getInstance().send("发送事件");
         String dcode = view.getDcode();
-        DtcCustom dtc = new DtcCustom();
-        dtc.setDcode(dcode);
-        ServiceFactory.getInstance().createService(PostActivation.class)
-                .postActivation(dtc,"queryDtcByDcodeJson.action")
-                .subscribeOn(Schedulers.io())
+        model.getDtcCustom(dcode).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<DtcCustom>>() {
                     @Override

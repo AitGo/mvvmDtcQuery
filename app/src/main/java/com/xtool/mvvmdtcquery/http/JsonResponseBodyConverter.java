@@ -5,11 +5,12 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
-import com.xtool.dtcquery.bean.Message;
-import com.xtool.dtcquery.utils.Base64Utils;
-import com.xtool.dtcquery.utils.CodingUtils;
-import com.xtool.dtcquery.utils.ContextUtil;
-import com.xtool.dtcquery.utils.RSAUtils;
+import com.xtool.mvvmdtcquery.bean.Message;
+import com.xtool.mvvmdtcquery.utils.Base64Utils;
+import com.xtool.mvvmdtcquery.utils.CodingUtils;
+import com.xtool.mvvmdtcquery.utils.ContextUtil;
+import com.xtool.mvvmdtcquery.utils.RSAUtils;
+
 
 import java.io.IOException;
 import java.lang.reflect.Field;
