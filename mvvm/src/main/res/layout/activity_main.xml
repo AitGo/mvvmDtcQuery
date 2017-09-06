@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="dcode"
+            type="java.lang.String"/>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,7 +26,7 @@
             android:id="@+id/et_dcode"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="@{dcode}"
             />
 
         <Button
@@ -24,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="query"
+            android:onClick="@{clickListener}"
             />
     </LinearLayout>
 
@@ -34,3 +45,4 @@
 
 
 </LinearLayout>
+</layout>

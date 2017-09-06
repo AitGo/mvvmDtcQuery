@@ -1,6 +1,7 @@
 package com.xtool.mvvmdtcquery.main;
 
 import android.app.Activity;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import com.xtool.mvvmdtcquery.R;
 import com.xtool.mvvmdtcquery.adapter.DtcListAdapter;
 import com.xtool.mvvmdtcquery.bean.DtcCustom;
+import com.xtool.mvvmdtcquery.databinding.ActivityMainBinding;
 import com.xtool.mvvmdtcquery.utils.RxBus;
 
 import java.util.ArrayList;
@@ -18,13 +20,11 @@ import java.util.List;
 import io.reactivex.functions.Consumer;
 
 
-public class MainActivity extends Activity implements MainView,View.OnClickListener {
+public class MainActivity extends Activity implements MainView {
 
     private MainPresenter presenter;
-
+    private ActivityMainBinding binding;
     private final String TAG = this.getClass().getSimpleName();
-    private Button btn_query;
-    private EditText et_dcode;
     private ListView lv_dtc;
     private DtcListAdapter adapter;
     private List<DtcCustom> dtcCustomList = new ArrayList<DtcCustom>();
@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         initView();
         presenter = new MainPresenterImpl(this);
     }
@@ -44,10 +44,13 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
     }
 
     private void initView() {
-        btn_query = (Button) findViewById(R.id.btn_query);
-        et_dcode = (EditText) findViewById(R.id.et_dcode);
+        binding.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onClick();
+            }
+        });
         lv_dtc = (ListView) findViewById(R.id.lv_dtc);
-        btn_query.setOnClickListener(this);
         adapter = new DtcListAdapter(this,dtcCustomList);
         lv_dtc.setAdapter(adapter);
 
@@ -60,16 +63,6 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_query:
-                presenter.onClick();
-                break;
-        }
-    }
-
-
-    @Override
     public void showListMessage(List<DtcCustom> dtcCustoms) {
         dtcCustomList.clear();
         dtcCustomList.addAll(dtcCustoms);
@@ -79,6 +72,6 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
 
     @Override
     public String getDcode() {
-        return et_dcode.getText().toString();
+        return binding.getDcode();
     }
 }
