@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.xtool.mvpdtcquery.R;
 import com.xtool.mvpdtcquery.adapter.DtcListAdapter;
 import com.xtool.mvpdtcquery.bean.DtcCustom;
 import com.xtool.mvpdtcquery.utils.RxBus;
+import com.xtool.mvpdtcquery.widget.ProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,7 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
     private Button btn_query;
     private EditText et_dcode;
     private ListView lv_dtc;
+    private ProgressDialog progressDialog;
     private DtcListAdapter adapter;
     private List<DtcCustom> dtcCustomList = new ArrayList<DtcCustom>();
 
@@ -50,6 +53,7 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
         btn_query.setOnClickListener(this);
         adapter = new DtcListAdapter(this,dtcCustomList);
         lv_dtc.setAdapter(adapter);
+        progressDialog = new ProgressDialog(this);
 
         RxBus.getInstance().subscribe(String.class, new Consumer() {
             @Override
@@ -80,5 +84,15 @@ public class MainActivity extends Activity implements MainView,View.OnClickListe
     @Override
     public String getDcode() {
         return et_dcode.getText().toString();
+    }
+
+    @Override
+    public void showProgressDialog() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
     }
 }

@@ -29,6 +29,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onClick() {
+        view.showProgressDialog();
         String dcode = view.getDcode();
         model.getDtcCustom(dcode)
                 .subscribeOn(Schedulers.io())
@@ -41,12 +42,14 @@ public class MainPresenterImpl implements MainPresenter {
                             Log.e(TAG,dtcCustom.getDname());
                         }
                         view.showListMessage(dtcCustoms);
+                        view.dismissProgressDialog();
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG,"onError");
                         e.printStackTrace();
+                        view.dismissProgressDialog();
                     }
 
                     @Override

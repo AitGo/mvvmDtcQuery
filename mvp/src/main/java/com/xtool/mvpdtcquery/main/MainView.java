@@ -13,7 +13,11 @@ public interface MainView {
     /**
      * 显示list数据
      */
-    public void showListMessage(List<DtcCustom> dtcCustoms);
+    void showListMessage(List<DtcCustom> dtcCustoms);
 
-    public String getDcode();
+    String getDcode();
+
+    void showProgressDialog();
+
+    void dismissProgressDialog();
 }
